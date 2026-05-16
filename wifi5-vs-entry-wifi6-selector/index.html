@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Industrial WiFi 5 vs Entry-Level WiFi 6 — PCBA Cost & Thermal Budget Evaluator</title>
+<meta name="description" content="Interactive PCBA cost, thermal budget, and manufacturing yield calculator comparing industrial WiFi 5 (QCA9563+QCA9886) vs entry-level WiFi 6 (MT7981A) modules. Based on 300,000+ unit production data across 40+ ODM/OEM projects (2020-2025).">
+<link rel="canonical" href="https://www.zukaka.com/blog/wifi-5-modules-over-entry-level-wifi-6/">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #f4f6f9;
+    color: #1a1a2e;
+    line-height: 1.6;
+  }
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+
+  header {
+    background: linear-gradient(135deg, #1a3a5c 0%, #2d5a27 100%);
+    color: #fff;
+    padding: 48px 0 40px;
+  }
+  header h1 { font-size: 1.85rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.02em; }
+  header p { font-size: 1rem; opacity: .88; max-width: 800px; }
+
+  .badge-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .badge {
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: .76rem;
+    font-weight: 500;
+  }
+
+  section { padding: 36px 0; border-bottom: 1px solid #e2e8f0; }
+  section:last-of-type { border-bottom: none; }
+  h2 { font-size: 1.35rem; font-weight: 600; margin-bottom: 18px; color: #1a3a5c; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; color: #1a1a2e; }
+
+  .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 26px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06), 0 2px 12px rgba(0,0,0,.04);
+  }
+
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 4px; color: #334155; }
+  .form-group .hint { font-size: .75rem; color: #64748b; margin-bottom: 4px; }
+  input[type="range"] {
+    width: 100%; height: 6px; -webkit-appearance: none; background: #d1d5db; border-radius: 3px; outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 18px; height: 18px; background: #1a3a5c; border-radius: 50%; cursor: pointer;
+  }
+  .range-row { display: flex; justify-content: space-between; font-size: .8rem; color: #475569; margin-top: 2px; }
+
+  select {
+    width: 100%; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 8px;
+    font-size: .88rem; background: #fff; color: #1a1a2e; cursor: pointer;
+  }
+  select:focus { border-color: #1a3a5c; outline: none; box-shadow: 0 0 0 3px rgba(26,58,92,.12); }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+  .stat-item {
+    background: #f8fafc; border-radius: 8px; padding: 14px;
+    text-align: center; border: 1px solid #e2e8f0;
+  }
+  .stat-item .value { font-size: 1.3rem; font-weight: 700; color: #1a3a5c; }
+  .stat-item .value.high { color: #2d5a27; }
+  .stat-item .value.warn { color: #b91c1c; }
+  .stat-item .label { font-size: .72rem; color: #64748b; text-transform: uppercase; letter-spacing: .04em; margin-top: 2px; }
+
+  .result-highlight {
+    background: #f0fdf4; border: 1px solid #86efac; border-radius: 10px; padding: 18px; margin-top: 16px;
+  }
+  .result-highlight h4 { color: #166534; margin-bottom: 4px; font-size: .95rem; }
+  .result-highlight .verdict { font-size: 1.05rem; font-weight: 700; color: #166534; margin: 6px 0; }
+  .result-highlight .detail { font-size: .82rem; color: #374151; }
+  .result-highlight.warn { background: #fef2f2; border-color: #fca5a5; }
+  .result-highlight.warn h4 { color: #991b1b; }
+  .result-highlight.warn .verdict { color: #991b1b; }
+
+  .source-note {
+    font-size: .73rem; color: #94a3b8; margin-top: 10px;
+    padding: 10px 14px; background: #f8fafc; border-radius: 6px; border-left: 3px solid #94a3b8;
+  }
+  .source-note strong { color: #475569; }
+
+  .compare-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+  .compare-table th { background: #1a3a5c; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; font-size: .82rem; }
+  .compare-table th:first-child { border-radius: 8px 0 0 0; }
+  .compare-table th:last-child { border-radius: 0 8px 0 0; }
+  .compare-table td { padding: 9px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+  .compare-table tr:nth-child(even) { background: #f8fafc; }
+  .compare-table .col-wifi5 { color: #1a3a5c; font-weight: 600; }
+  .compare-table .col-wifi6 { color: #991b1c; font-weight: 600; }
+  .compare-table .col-best { color: #2d5a27; font-weight: 700; }
+
+  .footer {
+    padding: 28px 0;
+    font-size: .82rem;
+    color: #64748b;
+    border-top: 1px solid #e2e8f0;
+    margin-top: 12px;
+  }
+  .footer a { color: #1a3a5c; font-weight: 500; }
+
+  @media (max-width: 768px) {
+    .tool-grid { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.35rem; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+    header { padding: 32px 0 28px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>Industrial WiFi 5 vs Entry-Level WiFi 6: PCBA Cost &amp; Thermal Budget Evaluator</h1>
+    <p>Compare total cost of ownership, thermal design power, PCB area requirements, manufacturing yield, and calibration throughput across 12 key engineering parameters. Built on production data from 300,000+ PCBA units across 40+ ODM/OEM projects (2020-2025).</p>
+    <div class="badge-bar">
+      <span class="badge">&#9733; Data from &sect;2-3 of the full guide</span>
+      <span class="badge">QCA9563+QCA9886 (WiFi 5)</span>
+      <span class="badge">MT7981A (Entry WiFi 6)</span>
+      <span class="badge">FPY / Thermal / BOM</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- INTERACTIVE CALCULATOR -->
+  <section>
+    <h2>Project Configuration &amp; Cost Estimator</h2>
+    <p style="margin-bottom:18px;color:#475569;font-size:.9rem;">Adjust your production volume, enclosure type, PCB form factor, and annual volume to see how WiFi 5 and entry-level WiFi 6 compare across total cost, thermal margin, PCB area, and expected yield.</p>
+
+    <div class="tool-grid">
+      <!-- Left: Inputs -->
+      <div class="card">
+        <h3>Production Parameters</h3>
+
+        <div class="form-group">
+          <label for="annualVol">Annual Production Volume</label>
+          <div class="range-row">
+            <span>1,000</span>
+            <span id="annualVolLabel">10,000</span>
+            <span>100,000</span>
+          </div>
+          <input type="range" id="annualVol" min="1" max="100" value="10">
+        </div>
+
+        <div class="form-group">
+          <label for="enclosureType">Enclosure Type &amp; Cooling</label>
+          <div class="hint">Determines thermal budget constraints (&sect;2.1)</div>
+          <select id="enclosureType">
+            <option value="indoor">Indoor, fan-cooled (35&deg;C ambient)</option>
+            <option value="ip65" selected>IP65 Outdoor, passive (55&deg;C ambient, 600 W/m&sup2; solar)</option>
+            <option value="compact">Compact / Dongle (passive, 40&deg;C ambient)</option>
+            <option value="industrial">Industrial cabinet, forced air (50&deg;C ambient)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="pcbSize">PCB Form Factor</label>
+          <div class="hint">Smaller boards amplify power delivery area constraints (&sect;2.3)</div>
+          <select id="pcbSize">
+            <option value="large">90&times;70 mm — Standard CPE/AP</option>
+            <option value="medium" selected>65&times;45 mm — IoT Gateway / Industrial</option>
+            <option value="small">40&times;25 mm — USB Dongle / Compact</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="deployScenario">Deployment Scenario</label>
+          <div class="hint">Multi-client density determines OFDMA relevance (&sect;1.2)</div>
+          <select id="deployScenario">
+            <option value="ptp" selected>PtP Bridge (2 clients)</option>
+            <option value="small-ap">Single AP (8-16 clients)</option>
+            <option value="dense-ap">Dense AP (32+ clients)</option>
+          </select>
+        </div>
+
+        <div style="margin-top:6px;padding:10px 14px;background:#f1f5f9;border-radius:8px;font-size:.78rem;color:#475569;">
+          <strong>Data sources:</strong> TDP values (&sect;2.1), PCB area &amp; power supply (&sect;2.3), FPY &amp; rework (&sect;3.1), calibration throughput (&sect;3.2), throughput test data (&sect;4).
+        </div>
+      </div>
+
+      <!-- Right: Results -->
+      <div class="card">
+        <h3>Comparative Results</h3>
+        <div class="stat-grid">
+          <div class="stat-item">
+            <div class="value" id="dispBom5">$18.40</div>
+            <div class="label">WiFi 5 BOM Cost</div>
+          </div>
+          <div class="stat-item">
+            <div class="value" id="dispBom6">$29.70</div>
+            <div class="label">Entry WiFi 6 BOM Cost</div>
+          </div>
+          <div class="stat-item">
+            <div class="value" id="dispBomDelta">+61%</div>
+            <div class="label">WiFi 6 Cost Premium</div>
+          </div>
+          <div class="stat-item">
+            <div class="value" id="dispAnnualSavings">$113,000</div>
+            <div class="label">Annual Savings with WiFi 5</div>
+          </div>
+        </div>
+
+        <div class="stat-grid" style="margin-top:14px;">
+          <div class="stat-item">
+            <div class="value" id="dispTdp5">4.8 W</div>
+            <div class="label">WiFi 5 Typical TDP</div>
+          </div>
+          <div class="stat-item">
+            <div class="value warn" id="dispTdp6">7.8 W</div>
+            <div class="label">Entry WiFi 6 Typical TDP</div>
+          </div>
+          <div class="stat-item">
+            <div class="value" id="dispFpy5">98.2%</div>
+            <div class="label">WiFi 5 First-Pass Yield</div>
+          </div>
+          <div class="stat-item">
+            <div class="value warn" id="dispFpy6">94.2%</div>
+            <div class="label">Entry WiFi 6 FPY</div>
+          </div>
+        </div>
+
+        <div class="stat-grid" style="margin-top:14px;">
+          <div class="stat-item">
+            <div class="value" id="dispCal5">42</div>
+            <div class="label">WiFi 5 Cal Time (sec)</div>
+          </div>
+          <div class="stat-item">
+            <div class="value warn" id="dispCal6">92</div>
+            <div class="label">Entry WiFi 6 Cal Time (sec)</div>
+          </div>
+          <div class="stat-item">
+            <div class="value" id="dispPcbPct5">8.5%</div>
+            <div class="label">WiFi 5 PS Area (% of PCB)</div>
+          </div>
+          <div class="stat-item">
+            <div class="value warn" id="dispPcbPct6">16.5%</div>
+            <div class="label">Entry WiFi 6 PS Area (% of PCB)</div>
+          </div>
+        </div>
+
+        <div id="recBox" class="result-highlight">
+          <h4>Engineering Verdict</h4>
+          <div class="verdict" id="recTitle">WiFi 5 Recommended for This Project</div>
+          <div class="detail" id="recText">Based on your IP65 outdoor enclosure with passive cooling and 10,000-unit annual volume, WiFi 5 saves $113,000/year in BOM costs alone, runs 38% cooler, delivers 4% higher manufacturing yield, and avoids thermal shutdown risk. The entry-level WiFi 6 MT7981A would exceed 105&deg;C Tj in this enclosure.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THERMAL BUDGET DETAIL -->
+  <section>
+    <h2>Thermal Budget &amp; Enclosure Viability Check</h2>
+    <p style="margin-bottom:14px;color:#475569;font-size:.88rem;">Based on thermal chamber test data (&sect;2.1): IP65 outdoor enclosures with passive cooling at 55&deg;C ambient + 600 W/m&sup2; solar load.</p>
+    <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);">
+      <div class="stat-item">
+        <div class="value" id="dispTj5">82&deg;C</div>
+        <div class="label">WiFi 5 Tj (steady-state)</div>
+      </div>
+      <div class="stat-item">
+        <div class="value warn" id="dispMaxTj6">105&deg;C+</div>
+        <div class="label">WiFi 6 Tj (after 40 min)</div>
+      </div>
+      <div class="stat-item">
+        <div class="value" id="dispRisk5">No Risk</div>
+        <div class="label">WiFi 5 Thermal Risk</div>
+      </div>
+      <div class="stat-item">
+        <div class="value warn" id="dispRisk6">Shutdown Risk</div>
+        <div class="label">WiFi 6 Thermal Risk</div>
+      </div>
+    </div>
+    <div class="source-note">
+      <strong>Source (&sect;2.1):</strong> Thermal chamber tests, ambient 55&deg;C, solar load 600 W/m&sup2;, 80% duty cycle continuous operation. WiFi 5 (QCA9531+QCA9886): Tj stabilized at 82&deg;C. WiFi 6 (MT7981A): Tj exceeded 105&deg;C within 40 min; 3 of 6 modules exhibited thermal shut-down cycling after 90 min.
+    </div>
+  </section>
+
+  <!-- COMPREHENSIVE COMPARISON TABLE -->
+  <section>
+    <h2>Comprehensive Engineering Comparison: Industrial WiFi 5 vs Entry-Level WiFi 6</h2>
+    <p style="margin-bottom:14px;color:#475569;font-size:.85rem;">All data sourced from the full engineering guide (&sect;1-4): production data from 300,000+ PCBA units across 40+ ODM/OEM programs (2020-2025), RF chamber tests, and thermal validation.</p>
+    <div style="overflow-x:auto;">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Industrial WiFi 5 (QCA9563+QCA9886)</th>
+            <th>Entry-Level WiFi 6 (MT7981A)</th>
+            <th>Advantage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PHY Rate (2&times;2:2, 80 MHz)</td>
+            <td class="col-wifi5">866.7 Mbps (MCS9, 256-QAM)</td>
+            <td class="col-wifi6">1.2 Gbps (MCS11, 1024-QAM)</td>
+            <td>WiFi 6: +38% raw PHY</td>
+          </tr>
+          <tr>
+            <td>Real-World Throughput Gain (PtP, 500 m)</td>
+            <td class="col-best">Baseline (450-520 Mbps UDP)</td>
+            <td class="col-wifi6">+5-10% (480-560 Mbps UDP)</td>
+            <td class="col-best">WiFi 5: Comparable at range</td>
+          </tr>
+          <tr>
+            <td>Throughput at 2 km (LOS)</td>
+            <td class="col-best">250-350 Mbps (MCS9 maintained)</td>
+            <td class="col-wifi6">260-360 Mbps (fallback to MCS9)</td>
+            <td class="col-best">Equivalent — link budget limited</td>
+          </tr>
+          <tr>
+            <td>Typical TDP (Sustained)</td>
+            <td class="col-best">4.0-5.0 W</td>
+            <td class="col-wifi6">5.5-7.0 W (8.5 W peak)</td>
+            <td class="col-best">WiFi 5: 40-75% lower</td>
+          </tr>
+          <tr>
+            <td>Junction Temp (IP65, 55&deg;C amb., passive)</td>
+            <td class="col-best">82&deg;C (stable)</td>
+            <td class="col-wifi6">105&deg;C+ (thermal cycling)</td>
+            <td class="col-best">WiFi 5: Viable in sealed enclosures</td>
+          </tr>
+          <tr>
+            <td>PCB Power Supply Area</td>
+            <td class="col-best">7-10% of total PCB</td>
+            <td class="col-wifi6">14-19% of total PCB</td>
+            <td class="col-best">WiFi 5: 2x more space-efficient</td>
+          </tr>
+          <tr>
+            <td>Power Rails Required</td>
+            <td class="col-best">Single 3.3V rail</td>
+            <td class="col-wifi6">4 rails (3.3V, 1.2V, 1.35V, 0.9V)</td>
+            <td class="col-best">WiFi 5: Simpler PDN design</td>
+          </tr>
+          <tr>
+            <td>SoC Package</td>
+            <td class="col-best">QFN-88 / BGA-196 (0.5-0.65 mm pitch)</td>
+            <td class="col-wifi6">BGA-518 / BGA-672 (0.45-0.5 mm pitch)</td>
+            <td class="col-best">WiFi 5: Standard SMT process</td>
+          </tr>
+          <tr>
+            <td>First-Pass Yield (SMT Assembly)</td>
+            <td class="col-best">97.8-98.6%</td>
+            <td class="col-wifi6">94.2% (BGA voiding, HiP defects)</td>
+            <td class="col-best">WiFi 5: +4% FPY advantage</td>
+          </tr>
+          <tr>
+            <td>Rework Rate</td>
+            <td class="col-best">1.3%</td>
+            <td class="col-wifi6">4.1%</td>
+            <td class="col-best">WiFi 5: 3x lower rework burden</td>
+          </tr>
+          <tr>
+            <td>RF Calibration Time</td>
+            <td class="col-best">35-50 sec/unit</td>
+            <td class="col-wifi6">75-110 sec/unit</td>
+            <td class="col-best">WiFi 5: 2x faster calibration</td>
+          </tr>
+          <tr>
+            <td>BOM Component Count (Power Section)</td>
+            <td class="col-best">Baseline</td>
+            <td class="col-wifi6">+12-18 parts (PMIC/DC-DC)</td>
+            <td class="col-best">WiFi 5: Lower BOM complexity</td>
+          </tr>
+          <tr>
+            <td>FEM Linearity Requirement (EVM)</td>
+            <td class="col-best">-32 dB (256-QAM) — standard FEM</td>
+            <td class="col-wifi6">-35 dB (1024-QAM) — premium FEM</td>
+            <td class="col-best">WiFi 5: 3 dB relaxed EVM spec</td>
+          </tr>
+          <tr>
+            <td>OFDMA Multi-Client Gain (&le;16 clients)</td>
+            <td class="col-best">N/A (DL-MU-MIMO sufficient)</td>
+            <td class="col-wifi6">+7-12% aggregate throughput</td>
+            <td class="col-best">WiFi 5: Negligible difference at low density</td>
+          </tr>
+          <tr>
+            <td>BOM Cost (Est. at 10K volumes)</td>
+            <td class="col-best">$18.40/unit</td>
+            <td class="col-wifi6">$29.70/unit</td>
+            <td class="col-best">WiFi 5: 38% lower cost</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="source-note">
+      <strong>Sources:</strong> PHY rates (&sect;1.1); throughput data (&sect;4.1); TDP and thermal test data (&sect;2.1); PCB area and power delivery (&sect;2.3); SMT FPY and rework (&sect;3.1); calibration throughput (&sect;3.2); BOM estimates derived from component costs cited in &sect;2.2-2.3 and current market pricing for Q4 2025.
+    </div>
+  </section>
+
+  <!-- WHEN TO CHOOSE EACH -->
+  <section style="border-bottom:none;">
+    <h2>Decision Framework: WiFi 5 or Entry-Level WiFi 6?</h2>
+    <div class="tool-grid">
+      <div class="card" style="border-left: 4px solid #2d5a27;">
+        <h3 style="color:#2d5a27;">&#10003; Choose Industrial WiFi 5 When</h3>
+        <ul style="list-style:none;padding:0;font-size:.88rem;">
+          <li style="padding:8px 0;border-bottom:1px solid #f1f5f9;">&#8226; Deploying in IP65+ passive-cooled enclosures (thermal risk with WiFi 6)</li>
+          <li style="padding:8px 0;border-bottom:1px solid #f1f5f9;">&#8226; Running PtP bridges at 1-5 km range (link-budget limited, not PHY limited)</li>
+          <li style="padding:8px 0;border-bottom:1px solid #f1f5f9;">&#8226; Serving 2-16 clients per AP (OFDMA offers minimal gain)</li>
+          <li style="padding:8px 0;border-bottom:1px solid #f1f5f9;">&#8226; Building space-constrained PCBA (65&times;45 mm or smaller)</li>
+          <li style="padding:8px 0;border-bottom:1px solid #f1f5f9;">&#8226; Targeting first-pass yield above 97%</li>
+          <li style="padding:8px 0;border-bottom:1px solid #f1f5f9;">&#8226; Annual volumes of 5,000-50,000 units (cost-sensitive)</li>
+          <li style="padding:8px 0;">&#8226; Requiring 3-4 week design-to-manufacturing cycle time</li>
+        </ul>
+      </div>
+      <div class="card" style="border-left: 4px solid #1a3a5c;">
+        <h3 style="color:#1a3a5c;">&#8679; Consider Entry-Level WiFi 6 When</h3>
+        <ul style="list-style:none;padding:0;font-size:.88rem;">
+          <li style="padding:8px 0;border-bottom:1px solid #f1f5f9;">&#8226; Serving 32+ concurrent clients per AP (OFDMA benefit scales)</li>
+          <li style="padding:8px 0;border-bottom:1px solid #f1f5f9;">&#8226; Deploying in forced-air or actively cooled enclosures</li>
+          <li style="padding:8px 0;border-bottom:1px solid #f1f5f9;">&#8226; Requiring &lt;10 ms latency for real-time control loops</li>
+          <li style="padding:8px 0;border-bottom:1px solid #f1f5f9;">&#8226; 50%+ of client devices support 802.11ax (OFDMA clients exist)</li>
+          <li style="padding:8px 0;border-bottom:1px solid #f1f5f9;">&#8226; Budget allows 50-60% higher BOM cost per unit</li>
+          <li style="padding:8px 0;border-bottom:1px solid #f1f5f9;">&#8226; 90&times;70 mm or larger PCB area available</li>
+          <li style="padding:8px 0;">&#8226; WPA3 compliance is mandatory (government, healthcare)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTBOUND LINK -->
+  <div class="footer">
+    <p>For the full engineering analysis including detailed link budget calculations, thermal chamber test methodology, SMT reflow profiles, and production line data from 40+ ODM/OEM programs, read the complete guide: <a href="https://www.zukaka.com/blog/wifi-5-modules-over-entry-level-wifi-6/" target="_blank">Why Small and Mid-Scale Projects Should Select Industrial WiFi 5 Modules Over Entry-Level WiFi 6 Solutions &rarr;</a></p>
+    <p style="margin-top:8px;">All technical data sourced from Zukaka R&D lab tests and production line records (2020-2025). For OEM/ODM consultation and module specifications, visit <a href="https://www.zukaka.com" target="_blank">zukaka.com</a>.</p>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Why Small and Mid-Scale Projects Should Select Industrial WiFi 5 Modules Over Entry-Level WiFi 6 Solutions: A Hardware Engineering Perspective",
+  "description": "Interactive PCBA cost, thermal budget, and manufacturing yield calculator comparing industrial WiFi 5 (QCA9563+QCA9886) vs entry-level WiFi 6 (MT7981A) modules. Based on production data from 300,000+ units across 40+ ODM/OEM projects with thermal chamber validation, link budget analysis, and SMT yield records.",
+  "author": {
+    "@id": "https://www.zukaka.com/#corp"
+  },
+  "publisher": {
+    "@id": "https://www.zukaka.com/#corp"
+  },
+  "datePublished": "2026-05-06",
+  "dateModified": "2026-05-16",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.zukaka.com/blog/wifi-5-modules-over-entry-level-wifi-6/"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Industrial WiFi 5 Module",
+    "description": "802.11ac Wave 2 industrial wireless module for OEM/ODM applications"
+  },
+  "mentions": [
+    {"@type": "Thing", "name": "QCA9563"},
+    {"@type": "Thing", "name": "QCA9886"},
+    {"@type": "Thing", "name": "MT7981A"},
+    {"@type": "Thing", "name": "802.11ac Wave 2"},
+    {"@type": "Thing", "name": "802.11ax"},
+    {"@type": "Thing", "name": "OFDMA"},
+    {"@type": "Thing", "name": "1024-QAM"},
+    {"@type": "Thing", "name": "256-QAM"},
+    {"@type": "Thing", "name": "thermal design power"},
+    {"@type": "Thing", "name": "first-pass yield"},
+    {"@type": "Thing", "name": "PCBA"},
+    {"@type": "Thing", "name": "ODM/OEM"},
+    {"@type": "Thing", "name": "link budget"}
+  ]
+}
+</script>
+
+<script>
+(function() {
+  var annualVol = document.getElementById('annualVol');
+  var annualVolLabel = document.getElementById('annualVolLabel');
+  var enclosureType = document.getElementById('enclosureType');
+  var pcbSize = document.getElementById('pcbSize');
+  var deployScenario = document.getElementById('deployScenario');
+
+  var dispBom5 = document.getElementById('dispBom5');
+  var dispBom6 = document.getElementById('dispBom6');
+  var dispBomDelta = document.getElementById('dispBomDelta');
+  var dispAnnualSavings = document.getElementById('dispAnnualSavings');
+  var dispTdp5 = document.getElementById('dispTdp5');
+  var dispTdp6 = document.getElementById('dispTdp6');
+  var dispFpy5 = document.getElementById('dispFpy5');
+  var dispFpy6 = document.getElementById('dispFpy6');
+  var dispCal5 = document.getElementById('dispCal5');
+  var dispCal6 = document.getElementById('dispCal6');
+  var dispPcbPct5 = document.getElementById('dispPcbPct5');
+  var dispPcbPct6 = document.getElementById('dispPcbPct6');
+  var dispTj5 = document.getElementById('dispTj5');
+  var dispMaxTj6 = document.getElementById('dispMaxTj6');
+  var dispRisk5 = document.getElementById('dispRisk5');
+  var dispRisk6 = document.getElementById('dispRisk6');
+  var recBox = document.getElementById('recBox');
+  var recTitle = document.getElementById('recTitle');
+  var recText = document.getElementById('recText');
+
+  function formatNum(n) {
+    if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+    if (n >= 1000) return Math.floor(n / 1000) + ',' + String(n % 1000).padStart(3, '0');
+    return String(n);
+  }
+
+  function formatCurrency(v) {
+    return '$' + v.toFixed(2);
+  }
+
+  function updateResults() {
+    var vol = parseInt(annualVol.value, 10) * 1000;
+    annualVolLabel.textContent = vol.toLocaleString('en-US');
+
+    var enclosure = enclosureType.value;
+    var pcb = pcbSize.value;
+    var scenario = deployScenario.value;
+
+    var tdp5 = 4.8;
+    var tdp6 = 6.2;
+    var tj5 = 82;
+    var tj6 = 95;
+
+    if (enclosure === 'ip65') {
+      tdp6 = 7.8;
+      tj5 = 82;
+      tj6 = 105;
+    } else if (enclosure === 'compact') {
+      tdp6 = 7.0;
+      tj5 = 88;
+      tj6 = 108;
+    } else if (enclosure === 'indoor') {
+      tdp6 = 6.5;
+      tj5 = 68;
+      tj6 = 82;
+    } else if (enclosure === 'industrial') {
+      tdp6 = 6.2;
+      tj5 = 75;
+      tj6 = 88;
+    }
+
+    var bom5, bom6;
+    if (vol >= 50000) {
+      bom5 = 15.80; bom6 = 24.50;
+    } else if (vol >= 25000) {
+      bom5 = 17.10; bom6 = 27.20;
+    } else if (vol >= 5000) {
+      bom5 = 18.40; bom6 = 29.70;
+    } else {
+      bom5 = 21.50; bom6 = 34.80;
+    }
+
+    var pcbPct5 = 8.5, pcbPct6 = 16.5;
+    if (pcb === 'small') {
+      pcbPct5 = 10.0; pcbPct6 = 19.0;
+    } else if (pcb === 'large') {
+      pcbPct5 = 7.0; pcbPct6 = 14.0;
+    }
+
+    var fpy5 = 98.2, fpy6 = 94.2;
+    if (pcb === 'small') fpy6 = 93.0;
+
+    var cal5 = 42, cal6 = 92;
+    if (pcb === 'small') cal6 = 100;
+
+    var unitSavings = bom6 - bom5;
+    var annualSavings = unitSavings * vol;
+    var bomPct = ((bom6 - bom5) / bom5 * 100);
+
+    var risk5Text = 'No Risk';
+    var risk6Text = 'Shutdown Risk';
+    if (tj6 < 90) risk6Text = 'Low Risk';
+    else if (tj6 < 100) risk6Text = 'Moderate Risk';
+
+    dispBom5.textContent = formatCurrency(bom5);
+    dispBom6.textContent = formatCurrency(bom6);
+    dispBomDelta.textContent = '+' + bomPct.toFixed(0) + '%';
+    dispAnnualSavings.textContent = '$' + formatNum(annualSavings);
+    dispTdp5.textContent = tdp5.toFixed(1) + ' W';
+    dispTdp6.textContent = tdp6.toFixed(1) + ' W';
+    dispFpy5.textContent = fpy5.toFixed(1) + '%';
+    dispFpy6.textContent = fpy6.toFixed(1) + '%';
+    dispCal5.textContent = cal5;
+    dispCal6.textContent = cal6;
+    dispPcbPct5.textContent = pcbPct5.toFixed(1) + '%';
+    dispPcbPct6.textContent = pcbPct6.toFixed(1) + '%';
+
+    var tj5Str = tj5 + '&#176;C';
+    var tj6Str = tj6 + '&#176;C+';
+    if (enclosure === 'compact') tj6Str = tj6 + '&#176;C+';
+    if (enclosure === 'indoor') tj6Str = tj6 + '&#176;C';
+    if (enclosure === 'industrial') tj6Str = tj6 + '&#176;C';
+    dispTj5.innerHTML = tj5Str;
+    dispMaxTj6.innerHTML = tj6Str;
+    dispRisk5.textContent = risk5Text;
+    dispRisk6.textContent = risk6Text;
+
+    var recClass = 'result-highlight';
+    var recTitleText = 'WiFi 5 Recommended for This Project';
+    var recDetailText = '';
+    var thermalWarning = '';
+    if (tj6 >= 100 && (enclosure === 'ip65' || enclosure === 'compact')) {
+      thermalWarning = ' The WiFi 6 MT7981A would exceed ' + tj6 + '&#176;C Tj in this enclosure, with thermal shutdown risk after 40-90 min of continuous operation. ';
+    }
+    var ofdmaNote = '';
+    if (scenario === 'dense-ap') {
+      ofdmaNote = ' For 32+ client deployments, WiFi 6 OFDMA may improve aggregate throughput by 7-12%, but this benefit is partially offset by the thermal and cost penalties. ';
+    } else if (scenario === 'small-ap') {
+      ofdmaNote = ' At 8-16 clients, OFDMA offers minimal real-world gain (7-12% aggregate), which does not justify the BOM premium and thermal risks. ';
+    } else {
+      ofdmaNote = ' In PtP bridge mode, OFDMA provides zero benefit. Throughput is link-budget limited, not medium-contention limited. ';
+    }
+    var pcbNote = '';
+    if (pcb === 'small') {
+      pcbNote = ' The 40x25 mm form factor is especially challenging for WiFi 6, where power delivery consumes 19% of PCB area vs 10% for WiFi 5. ';
+    }
+
+    if (bomPct > 50 && tj6 >= 100 && scenario !== 'dense-ap') {
+      recClass = 'result-highlight warn';
+      recTitleText = 'Strong Caution: Entry WiFi 6 Not Recommended';
+      recDetailText = 'WiFi 6 carries a ' + bomPct.toFixed(0) + '% BOM cost premium ($' + (bom6 - bom5).toFixed(2) + '/unit) and $' + formatNum(annualSavings) + ' higher annual cost at ' + vol.toLocaleString('en-US') + ' units.' + thermalWarning + ofdmaNote + pcbNote + 'WiFi 5 delivers comparable real-world throughput at lower cost, lower TDP, and higher manufacturing yield.';
+    } else if (scenario === 'dense-ap' && tj6 < 95) {
+      recClass = 'result-highlight';
+      recTitleText = 'Consider Entry WiFi 6';
+      recDetailText = 'With adequate cooling, WiFi 6 may be viable for your 32+ client scenario. However, the BOM premium is ' + bomPct.toFixed(0) + '% ($' + (bom6 - bom5).toFixed(2) + '/unit). Validate OFDMA gain with client devices that support 802.11ax.';
+    } else if (bomPct > 30) {
+      recClass = 'result-highlight';
+      recTitleText = 'WiFi 5 Recommended for This Project';
+      recDetailText = 'WiFi 5 saves ' + bomPct.toFixed(0) + '% on BOM ($' + (bom6 - bom5).toFixed(2) + '/unit), saving $' + formatNum(annualSavings) + '/year at ' + vol.toLocaleString('en-US') + ' units.' + thermalWarning + ofdmaNote + pcbNote + 'For small and mid-scale projects, the engineering trade-offs strongly favor industrial WiFi 5.';
+    } else if (tj6 >= 100) {
+      recClass = 'result-highlight warn';
+      recTitleText = 'Strong Caution: Entry WiFi 6 Has Thermal Risk';
+      recDetailText = 'WiFi 6 exceeds ' + tj6 + '&#176;C in this enclosure.' + thermalWarning + ofdmaNote + pcbNote;
+    } else {
+      recClass = 'result-highlight';
+      recTitleText = 'WiFi 5 Recommended for This Project';
+      recDetailText = 'Based on your configuration, WiFi 5 is the cost-effective choice.' + thermalWarning + ofdmaNote + pcbNote + 'The real-world throughput difference at typical deployment ranges is 5-10%, not enough to offset the BOM, thermal, and manufacturing penalties.';
+    }
+
+    recBox.className = recClass;
+    recTitle.textContent = recTitleText;
+    recText.innerHTML = recDetailText;
+  }
+
+  annualVol.addEventListener('input', updateResults);
+  enclosureType.addEventListener('change', updateResults);
+  pcbSize.addEventListener('change', updateResults);
+  deployScenario.addEventListener('change', updateResults);
+
+  updateResults();
+})();
+</script>
+</body>
+</html>

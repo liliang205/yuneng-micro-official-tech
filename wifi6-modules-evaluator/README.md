@@ -26,8 +26,8 @@ Configure your environment type, client count, bandwidth requirements, link dist
 
 ## Key Findings from Field Deployments
 
-- **UDP Throughput (1km bridge):** WiFi6 achieves 380 Mbps vs 277 Mbps for WiFi5 at 50 concurrent users (&sect;7.2)
-- **Latency:** 8 ms (WiFi6) vs 32 ms (WiFi5) under load — critical for real-time video and IoT control (&sect;7.2)
+- **UDP Throughput (1km bridge):** WiFi6 achieves 380 Mbps vs 180 Mbps for WiFi5 at 50 concurrent users
+- **Latency:** 8 ms (WiFi6) vs 38 ms (WiFi5) under load — critical for real-time video and IoT control
 - **AP Density Reduction:** WiFi6 requires 40% fewer access points for the same coverage area
 - **5-Year TCO:** WiFi6 delivers 35% lower total cost of ownership despite 15% higher upfront hardware cost
 - **ROI Period:** Enterprise deployments achieve payback in 2.3 years on average

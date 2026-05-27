@@ -4,7 +4,7 @@ title: "Dual-Band WiFi 5 Module Design: 2.4GHz vs 5GHz RF Front-End Tradeoffs fo
 date: 2026-05-27
 categories: [Industrial-Networking]
 tags: [Wireless-Modules, PCBA-Manufacturing, WiFi5]
-canonical_url: "https://liliang205.github.io/yuneng-micro-official-tech/2-4-ghz-vs-5ghz-dual-band-wifi-5-modules"
+canonical_url: "https://zukaka.com/blog/2-4-ghz-vs-5ghz-dual-band-wifi-5-modules"
 ---
 
 ### 1. Engineering Challenges

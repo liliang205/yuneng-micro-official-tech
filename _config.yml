@@ -1,7 +1,10 @@
 title: yuneng Micro Docs zukaka.com
 description: Industrial Wireless & RF Engineering
-baseurl: ""
+baseurl: "/yuneng-micro-official-tech"
 url: "https://liliang205.github.io"
+
+# 永久链接：去掉日期，只留标题.html
+permalink: /:title.html
 
 markdown: kramdown
 theme: minima

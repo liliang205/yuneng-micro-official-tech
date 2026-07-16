@@ -1,0 +1,708 @@
+<div class="oem-odm-page" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 40px 24px; color: #1a1a2e; line-height: 1.7; background: #fff;">
+
+<style>
+/* Reset for WordPress compatibility */
+.oem-odm-page * { box-sizing: border-box; margin: 0; padding: 0; }
+.oem-odm-page img { max-width: 100%; height: auto; border-radius: 8px; }
+.oem-odm-page a { text-decoration: none; transition: all 0.2s ease; }
+.oem-odm-page ul { list-style: none; padding: 0; margin: 0; }
+.oem-odm-page h1, .oem-odm-page h2, .oem-odm-page h3, .oem-odm-page h4 { line-height: 1.3; margin: 0 0 16px; }
+
+/* Breadcrumb */
+.oem-odm-page .breadcrumb { font-size: 14px; color: #666; margin-bottom: 32px; padding: 10px 0; border-bottom: 1px solid #e8e8e8; letter-spacing: 0.3px; }
+
+/* Page Header */
+.oem-odm-page .page-header { text-align: center; padding: 60px 20px 50px; background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%); border-radius: 16px; margin-bottom: 32px; color: #fff; }
+.oem-odm-page .page-header h1 { font-size: 36px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px; }
+.oem-odm-page .header-subtitle { font-size: 17px; color: #cbd5e1; max-width: 900px; margin: 0 auto 40px; line-height: 1.8; }
+.oem-odm-page .header-stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+.oem-odm-page .stat-item { text-align: center; min-width: 140px; }
+.oem-odm-page .stat-number { display: block; font-size: 40px; font-weight: 800; color: #60a5fa; margin-bottom: 4px; }
+.oem-odm-page .stat-label { font-size: 14px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+
+/* Certification Badges */
+.oem-odm-page .certification-badges { display: flex; gap: 12px; justify-content: center; margin-bottom: 40px; flex-wrap: wrap; }
+.oem-odm-page .badge { display: inline-block; padding: 6px 20px; background: #f0f4ff; border: 1px solid #2563eb; border-radius: 20px; font-size: 14px; font-weight: 600; color: #2563eb; letter-spacing: 1px; }
+
+/* Section Common */
+.oem-odm-page .section { margin-bottom: 64px; }
+.oem-odm-page .section h2 { font-size: 30px; font-weight: 700; text-align: center; margin-bottom: 16px; color: #0f172a; }
+.oem-odm-page .section > p { text-align: center; font-size: 16px; color: #475569; max-width: 1200px; margin: 0 auto 40px; }
+
+/* Facility Grid */
+.oem-odm-page .facility-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
+.oem-odm-page .facility-item { background: #f8fafc; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; }
+.oem-odm-page .facility-item img { width: 100%; height: 200px; object-fit: cover; display: block; }
+.oem-odm-page .facility-item p { padding: 14px 18px; font-weight: 600; font-size: 15px; color: #1e293b; text-align: center; }
+
+/* Capabilities Grid */
+.oem-odm-page .capabilities-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+.oem-odm-page .capability-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 32px 24px; transition: box-shadow 0.3s, transform 0.3s; }
+.oem-odm-page .capability-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); transform: translateY(-2px); }
+.oem-odm-page .capability-icon { width: 48px; height: 48px; margin-bottom: 18px; background: #eff6ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+.oem-odm-page .capability-icon img { width: 28px; height: 28px; }
+.oem-odm-page .capability-card h3 { font-size: 18px; color: #0f172a; margin-bottom: 12px; }
+.oem-odm-page .capability-card p { font-size: 15px; color: #475569; line-height: 1.7; }
+
+/* Product Category Grid */
+.oem-odm-page .product-category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 20px; }
+.oem-odm-page .product-category-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 28px 24px; transition: box-shadow 0.3s; }
+.oem-odm-page .product-category-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+.oem-odm-page .product-category-card h4 { margin-bottom: 10px; }
+.oem-odm-page .product-category-card h4 a { color: #1e3a5f; font-size: 17px; font-weight: 600; }
+.oem-odm-page .product-category-card h4 a:hover { color: #2563eb; }
+.oem-odm-page .product-category-card p { font-size: 14px; color: #475569; margin-bottom: 14px; line-height: 1.7; }
+.oem-odm-page .product-category-card > a { font-size: 14px; font-weight: 600; color: #2563eb; }
+.oem-odm-page .product-category-card > a:hover { color: #1d4ed8; text-decoration: underline; }
+
+/* ODM Category Block */
+.oem-odm-page .odm-category-block { background: #f8fafc; border-left: 4px solid #2563eb; border-radius: 0 12px 12px 0; padding: 28px 28px 20px; margin-bottom: 24px; }
+.oem-odm-page .odm-category-block h3 { font-size: 20px; color: #0f172a; margin-bottom: 10px; }
+.oem-odm-page .odm-category-block > p { font-size: 15px; color: #475569; text-align: left; margin-bottom: 16px; }
+.oem-odm-page .feature-list li { padding: 6px 0 6px 24px; position: relative; font-size: 14px; color: #334155; }
+.oem-odm-page .feature-list li::before { content: "▸"; position: absolute; left: 0; color: #2563eb; font-weight: 700; }
+
+/* FPGA Section */
+.oem-odm-page .fpga-technology { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 16px; padding: 50px 40px; color: #fff; }
+.oem-odm-page .fpga-technology h2 { color: #fff; }
+.oem-odm-page .fpga-technology p { color: #cbd5e1; text-align: left; font-size: 15px; margin-bottom: 16px; max-width: 100%; }
+.oem-odm-page .fpga-technology ul { margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px; }
+.oem-odm-page .fpga-technology li { padding: 10px 16px 10px 32px; background: rgba(255,255,255,0.06); border-radius: 8px; font-size: 14px; color: #e2e8f0; position: relative; }
+.oem-odm-page .fpga-technology li::before { content: "✓"; position: absolute; left: 12px; color: #60a5fa; font-weight: 700; }
+
+/* Order Specs */
+.oem-odm-page .order-specs-grid { max-width: 1200px; margin: 0 auto; }
+.oem-odm-page .spec-row { display: flex; align-items: baseline; padding: 18px 24px; background: #fff; border-radius: 10px; margin-bottom: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06); border: 1px solid #f1f5f9; }
+.oem-odm-page .spec-label { flex: 0 0 240px; font-weight: 600; font-size: 13px; color: #64748b; text-transform: uppercase; letter-spacing: 0.8px; }
+.oem-odm-page .spec-value { flex: 1; font-size: 15px; color: #0f172a; font-weight: 500; }
+
+/* QC Grid */
+.oem-odm-page .qc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; margin-bottom: 32px; }
+.oem-odm-page .qc-item { text-align: center; background: #f8fafc; border-radius: 12px; padding: 20px 12px; border: 1px solid #e2e8f0; }
+.oem-odm-page .qc-item img { width: 100%; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
+.oem-odm-page .qc-item p { font-size: 13px; font-weight: 600; color: #1e293b; text-align: center; margin: 0; }
+.oem-odm-page .qc-details ul { max-width: 700px; margin: 0 auto; }
+.oem-odm-page .qc-details li { padding: 10px 0 10px 24px; position: relative; font-size: 14px; color: #334155; border-bottom: 1px solid #f1f5f9; }
+.oem-odm-page .qc-details li::before { content: "•"; position: absolute; left: 8px; color: #2563eb; font-weight: 700; }
+.oem-odm-page .qc-details li:last-child { border-bottom: none; }
+.oem-odm-page .qc-test-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 1200px; margin: 0 auto; }
+.oem-odm-page .qc-test-item { display: flex; gap: 16px; align-items: flex-start; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 22px; transition: box-shadow 0.25s; }
+.oem-odm-page .qc-test-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+.oem-odm-page .qc-test-icon { flex-shrink: 0; width: 44px; height: 44px; background: #eff6ff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.oem-odm-page .qc-test-body h5 { font-size: 15px; color: #0f172a; margin-bottom: 4px; font-weight: 600; }
+.oem-odm-page .qc-test-body p { font-size: 13px; color: #64748b; line-height: 1.6; margin: 0; }
+
+/* Process Timeline - Horizontal Stepper */
+.oem-odm-page .process-stepper { display: flex; gap: 0; max-width: 1200px; margin: 0 auto; position: relative; }
+.oem-odm-page .process-stepper .step-item { flex: 1; text-align: center; position: relative; }
+.oem-odm-page .process-stepper .step-item::after { content: ""; position: absolute; top: 28px; left: 60%; width: 80%; height: 3px; background: linear-gradient(90deg, #2563eb, #93c5fd); z-index: 0; }
+.oem-odm-page .process-stepper .step-item:last-child::after { display: none; }
+.oem-odm-page .process-stepper .step-circle { width: 56px; height: 56px; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 800; margin: 0 auto 12px; position: relative; z-index: 1; box-shadow: 0 4px 14px rgba(37,99,235,0.3); }
+.oem-odm-page .process-stepper .step-label { font-size: 11px; color: #2563eb; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.oem-odm-page .process-stepper h4 { font-size: 14px; color: #0f172a; margin: 0 auto 6px; font-weight: 700; max-width: 140px; line-height: 1.4; }
+.oem-odm-page .process-stepper .step-desc { font-size: 12px; color: #64748b; line-height: 1.6; max-width: 150px; margin: 0 auto; display: none; }
+.oem-odm-page .process-stepper .step-item:hover .step-desc { display: block; }
+.oem-odm-page .process-stepper .step-item:hover .step-circle { transform: scale(1.1); box-shadow: 0 6px 24px rgba(37,99,235,0.4); }
+.oem-odm-page .process-stepper .step-meta { display: inline-block; font-size: 11px; color: #2563eb; font-weight: 600; background: #eff6ff; padding: 2px 10px; border-radius: 10px; margin-top: 4px; }
+
+/* Why Choose Us */
+.oem-odm-page .why-choose-us { background: #f8fafc; border-radius: 16px; padding: 50px 40px; }
+.oem-odm-page .why-choose-us > p { text-align: left; max-width: 100%; }
+.oem-odm-page .why-benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-top: 32px; }
+.oem-odm-page .benefit-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; }
+.oem-odm-page .benefit-item h4 { font-size: 16px; color: #0f172a; margin-bottom: 8px; }
+.oem-odm-page .benefit-item p { font-size: 14px; color: #475569; line-height: 1.7; }
+
+/* FAQ */
+.oem-odm-page .faq { max-width: 1200px; margin: 0 auto 64px; }
+.oem-odm-page .faq h2 { text-align: left; }
+.oem-odm-page .faq-item { border-bottom: 1px solid #e2e8f0; padding: 20px 0; }
+.oem-odm-page .faq-item h4 { font-size: 16px; color: #0f172a; margin-bottom: 8px; cursor: default; position: relative; padding-left: 28px; }
+.oem-odm-page .faq-item h4::before { content: "Q"; position: absolute; left: 0; color: #2563eb; font-weight: 700; font-size: 15px; }
+.oem-odm-page .faq-item p { font-size: 14px; color: #475569; line-height: 1.7; padding-left: 28px; }
+
+/* CTA Section */
+.oem-odm-page .cta-section { text-align: center; background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%); border-radius: 16px; padding: 60px 40px; color: #fff; }
+.oem-odm-page .cta-section h2 { color: #fff; font-size: 32px; margin-bottom: 16px; }
+.oem-odm-page .cta-section p { color: #cbd5e1; font-size: 16px; margin-bottom: 8px; max-width: 600px; margin-left: auto; margin-right: auto; }
+.oem-odm-page .cta-email { font-size: 18px; color: #60a5fa !important; font-weight: 600; margin-bottom: 28px !important; }
+.oem-odm-page .cta-button { display: inline-block; padding: 14px 36px; background: #2563eb; color: #fff; border-radius: 8px; font-size: 16px; font-weight: 600; margin: 6px 8px; }
+.oem-odm-page .cta-button:hover { background: #1d4ed8; transform: translateY(-1px); box-shadow: 0 4px 15px rgba(37,99,235,0.4); }
+.oem-odm-page .cta-button.secondary { background: transparent; border: 2px solid #60a5fa; color: #60a5fa; }
+.oem-odm-page .cta-button.secondary:hover { background: rgba(96,165,250,0.1); border-color: #93bbfc; }
+
+/* Responsive */
+@media (max-width: 768px) {
+.oem-odm-page { padding: 24px 16px; }
+.oem-odm-page .page-header { padding: 40px 16px; }
+.oem-odm-page .page-header h1 { font-size: 26px; }
+.oem-odm-page .header-subtitle { font-size: 15px; }
+.oem-odm-page .header-stats { gap: 24px; }
+.oem-odm-page .stat-number { font-size: 32px; }
+.oem-odm-page .section h2 { font-size: 24px; }
+.oem-odm-page .section > p { font-size: 15px; }
+.oem-odm-page .capabilities-grid { grid-template-columns: 1fr; }
+.oem-odm-page .product-category-grid { grid-template-columns: 1fr; }
+.oem-odm-page .why-benefits { grid-template-columns: 1fr; }
+.oem-odm-page .spec-row { flex-direction: column; padding: 14px 18px; }
+.oem-odm-page .spec-label { flex: none; margin-bottom: 4px; }
+.oem-odm-page .spec-value { font-size: 14px; }
+.oem-odm-page .fpga-technology { padding: 32px 20px; }
+.oem-odm-page .fpga-technology ul { grid-template-columns: 1fr; }
+.oem-odm-page .why-choose-us { padding: 32px 20px; }
+.oem-odm-page .benefit-item { padding: 18px; }
+.oem-odm-page .cta-section { padding: 40px 20px; }
+.oem-odm-page .cta-section h2 { font-size: 24px; }
+.oem-odm-page .cta-button { display: block; margin: 10px auto; max-width: 280px; }
+.oem-odm-page .process-stepper { flex-direction: column; gap: 16px; }
+.oem-odm-page .process-stepper .step-item::after { display: none; }
+.oem-odm-page .process-stepper .step-item { display: flex; align-items: center; gap: 16px; text-align: left; }
+.oem-odm-page .process-stepper .step-circle { margin: 0; flex-shrink: 0; width: 44px; height: 44px; font-size: 18px; }
+.oem-odm-page .process-stepper .step-item .step-info { flex: 1; }
+.oem-odm-page .process-stepper .step-item h4 { margin: 0 0 2px; font-size: 15px; max-width: none; }
+.oem-odm-page .process-stepper .step-item .step-label { margin-bottom: 0; font-size: 10px; }
+.oem-odm-page .process-stepper .step-desc { display: block; font-size: 12px; color: #64748b; }
+.oem-odm-page .process-stepper .step-meta { margin-top: 6px; }
+.oem-odm-page .odm-category-block { padding: 20px 18px 16px; }
+.oem-odm-page .facility-item img { height: 160px; }
+.oem-odm-page .qc-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.oem-odm-page .qc-item { padding: 14px 8px; }
+.oem-odm-page .qc-item img { height: 80px; }
+.oem-odm-page .faq-item h4 { font-size: 15px; padding-left: 24px; }
+.oem-odm-page .faq-item p { font-size: 13px; padding-left: 24px; }
+.oem-odm-page .qc-test-grid { grid-template-columns: 1fr; gap: 12px; }
+.oem-odm-page .qc-test-item { padding: 16px; }
+}
+
+@media (max-width: 480px) {
+.oem-odm-page .page-header h1 { font-size: 22px; }
+.oem-odm-page .header-stats { flex-direction: column; align-items: center; gap: 16px; }
+.oem-odm-page .facility-grid { grid-template-columns: 1fr; }
+.oem-odm-page .qc-grid { grid-template-columns: repeat(2, 1fr); }
+.oem-odm-page .process-stepper .step-desc { font-size: 11px; }
+}
+</style>
+
+<div class="breadcrumb">Home / Company / OEM/ODM</div>
+
+<div class="page-header">
+<h1>OEM/ODM Manufacturer for Industrial Wireless Communication Equipment in China</h1>
+<p class="header-subtitle">Shenzhen Yuneng Micro Technology is an R&D-driven OEM/ODM manufacturer specializing in industrial wireless bridge PCBA, WiFi modules, Mesh network systems, and custom RF hardware. From spec to shipment — we deliver your branded wireless communication equipment with custom firmware, PCB design, and packaging. Factory-direct, CE/FCC certified, serving 40+ countries.</p>
+
+<div class="header-stats">
+<div class="stat-item">
+<span class="stat-number">15+</span>
+<span class="stat-label">Years in Wireless R&D</span>
+</div>
+<div class="stat-item">
+<span class="stat-number">40+</span>
+<span class="stat-label">Countries Served</span>
+</div>
+<div class="stat-item">
+<span class="stat-number">300+</span>
+<span class="stat-label">OEM/ODM Partners Worldwide</span>
+</div>
+<div class="stat-item">
+<span class="stat-number">100K+</span>
+<span class="stat-label">Units Shipped Annually</span>
+</div>
+</div>
+</div>
+
+<div class="certification-badges">
+<span class="badge">CE</span>
+<span class="badge">FCC</span>
+<span class="badge">RoHS</span>
+<span class="badge">IP68</span>
+</div>
+
+<!-- Manufacturing Facility Section -->
+<div class="section manufacturing-facility">
+<h2>Our R&D & Manufacturing Facility</h2>
+<p>Full-cycle production under one roof in Shenzhen Hi-Tech Park — from PCB design and SMT assembly to RF tuning, firmware flashing, and final packaging.</p>
+
+<div class="facility-grid">
+<div class="facility-item">
+<img src="https://aka.doubaocdn.com/s/BDnI1wmk1A" alt="Product Assembly Line" />
+<p>Product Assembly</p>
+</div>
+<div class="facility-item">
+<img src="https://aka.doubaocdn.com/s/ujUK1wmk1A" alt="PCBA Production" />
+<p>PCBA Production</p>
+</div>
+<div class="facility-item">
+<img src="https://aka.doubaocdn.com/s/dB4Q1wmk1A" alt="SMT Production Floor" />
+<p>SMT Production Floor</p>
+</div>
+<div class="facility-item">
+<img src="https://aka.doubaocdn.com/s/QVDT1wmk1A" alt="Environmental Stress Testing" />
+<p>Environmental Stress Testing</p>
+</div>
+</div>
+</div>
+
+<!-- Core Capabilities Section -->
+<div class="section capabilities">
+<h2>Our OEM/ODM Capabilities</h2>
+
+<div class="capabilities-grid">
+<div class="capability-card">
+<div class="capability-icon">
+<img src="https://aka.doubaocdn.com/s/YUaR1wmk1A" alt="Custom PCBA Design" />
+</div>
+<h3>Custom PCBA Design & Manufacturing</h3>
+<p>Full PCB lifecycle from schematic capture and RF layout through prototyping and volume production. We design wireless bridge boards, industrial motherboards, and WiFi modules based on Qualcomm and MediaTek industrial-grade chipsets. RF chain tuning for 2.4 GHz, 5.8 GHz, and multi-band configurations.</p>
+</div>
+
+<div class="capability-card">
+<div class="capability-icon">
+<img src="https://aka.doubaocdn.com/s/YUaR1wmk1A" alt="Firmware Customization" />
+</div>
+<h3>Firmware & Protocol Customization</h3>
+<p>Custom firmware built on OpenWrt, Qualcomm SDKs, or bare-metal environments. Private protocol stack development, Mesh networking algorithms, encryption integration, and custom web UI. Pre-configured deployment profiles for fast rollout.</p>
+</div>
+
+<div class="capability-card">
+<div class="capability-icon">
+<img src="https://aka.doubaocdn.com/s/YUaR1wmk1A" alt="White-Label Branding" />
+</div>
+<h3>White-Label Branding</h3>
+<p>Full branding support: custom silk-screen logos on enclosures, brand boot screen and web UI, custom packaging and retail boxes, branded user manuals and marketing materials. Zero Yuneng/Zukaka marking on the final product.</p>
+</div>
+
+<div class="capability-card">
+<div class="capability-icon">
+<img src="https://aka.doubaocdn.com/s/YUaR1wmk1A" alt="Industrial-Grade QA" />
+</div>
+<h3>Industrial-Grade Quality Assurance</h3>
+<p>Every unit passes high/low temperature burn-in, automated RF calibration, surge and ESD testing, waterproof and dust ingress verification (IP68), and long-duration stability trials. A signed QC report ships with every order — full traceability from component lot to delivery batch.</p>
+</div>
+
+<div class="capability-card">
+<div class="capability-icon">
+<img src="https://aka.doubaocdn.com/s/YUaR1wmk1A" alt="Antenna & Enclosure Design" />
+</div>
+<h3>Antenna & Enclosure Design</h3>
+<p>Custom antenna gain and pattern design (omni, sector, directional dish), enclosure modifications for IP-rated outdoor deployment, port layout changes, and mechanical design for vehicle-mount, backpack, or pole-mount form factors.</p>
+</div>
+
+<div class="capability-card">
+<div class="capability-icon">
+<img src="https://aka.doubaocdn.com/s/YUaR1wmk1A" alt="Logistics & Export" />
+</div>
+<h3>Logistics & Export</h3>
+<p>DDP/FOB/CIF shipping to 40+ countries. Full export documentation, CE/FCC certification handling, and customs clearance support included. DDP terms available for North America, Europe, and Southeast Asia.</p>
+</div>
+</div>
+</div>
+
+<!-- Products Available for OEM/ODM Section -->
+<div class="section products-available">
+<h2>Products Available for OEM/ODM</h2>
+<p>Browse our base product catalog — select a model to customize. PCB design, firmware, branding, and packaging are all configurable.</p>
+
+<div class="product-category-grid">
+<div class="product-category-card">
+<h4><a href="https://www.zukaka.com/product-category/wireless-bridge/">Wireless Bridges (PtP / PtMP)</a></h4>
+<p>Long-range gigabit wireless bridges — point-to-point up to 50 km and point-to-multipoint. 5.8 GHz and dual-band options for CCTV backhaul, campus links, and ISP last-mile.</p>
+<a href="https://www.zukaka.com/product-category/wireless-bridge/">View Products →</a>
+</div>
+
+<div class="product-category-card">
+<h4><a href="https://www.zukaka.com/product-category/wifi-module/">WiFi Modules (Wi-Fi 5 to Wi-Fi 7)</a></h4>
+<p>Industrial-grade WiFi modules based on Qualcomm and MediaTek chipsets. Wi-Fi 5, Wi-Fi 6/6E, and Wi-Fi 7 support. Ideal for embedded system integration and custom motherboard designs.</p>
+<a href="https://www.zukaka.com/product-category/wifi-module/">View Products →</a>
+</div>
+
+<div class="product-category-card">
+<h4><a href="https://www.zukaka.com/product-category/mesh-network/">Mesh Network Systems</a></h4>
+<p>Self-organizing Mesh network terminals with distributed node architecture, automatic link detection, dynamic route healing, and seamless failover. No central base station required.</p>
+<a href="https://www.zukaka.com/product-category/mesh-network/">View Products →</a>
+</div>
+
+<div class="product-category-card">
+<h4><a href="https://www.zukaka.com/product-category/wireless-ap-motherboard/">Wireless AP Motherboards</a></h4>
+<p>Custom wireless AP motherboards with FPGA-accelerated processing. Designed for industrial access points, vehicle-mounted radios, and portable emergency communication systems.</p>
+<a href="https://www.zukaka.com/product-category/wireless-ap-motherboard/">View Products →</a>
+</div>
+
+<div class="product-category-card">
+<h4><a href="https://www.zukaka.com/product-category/rf-module/">RF Modules & Embedded Boards</a></h4>
+<p>RF motherboards, embedded modules, FPGA core boards, and hardware development kits for secondary development. For system integrators building custom wireless solutions.</p>
+<a href="https://www.zukaka.com/product-category/rf-module/">View Products →</a>
+</div>
+
+<div class="product-category-card">
+<h4><a href="https://www.zukaka.com/product-category/emergency-communication/">Emergency Communication Systems</a></h4>
+<p>Portable backpack emergency communication systems and vehicle-mounted mobile radios for disaster response, mining, and field operations. Infrastructure-free deployment.</p>
+<a href="https://www.zukaka.com/product-category/emergency-communication/">View Products →</a>
+</div>
+</div>
+</div>
+
+<!-- ODM Capabilities by Category Section -->
+<div class="section odm-by-category">
+<h2>What We Build for Industrial Wireless OEM/ODM Buyers</h2>
+<p>Whether you need a wireless bridge ODM partner, a custom WiFi module manufacturer, or a Mesh network OEM with your own management platform — we cover the full design-to-delivery cycle for each product line.</p>
+
+<div class="odm-category-block">
+<h3>Wireless Bridge ODM (PtP / PtMP)</h3>
+<p>5.8 GHz and dual-band point-to-point and point-to-multipoint wireless bridges — up to 50 km range. For CCTV backhaul, building-to-building campus links, rural ISP last-mile, and mining/port operations. Gigabit throughput with interference mitigation and DFS support.</p>
+<ul class="feature-list">
+<li>Custom output power and frequency band tuning</li>
+<li>Private protocol stack with AES-128 encryption</li>
+<li>Custom antenna gain (12-25 dBi) and weatherproof enclosure</li>
+<li>Wide-temperature design: -40°C to 85°C operation</li>
+<li>PoE-powered with surge and ESD protection</li>
+</ul>
+</div>
+
+<div class="odm-category-block">
+<h3>WiFi Module ODM (Embedded)</h3>
+<p>Industrial-grade WiFi modules — Wi-Fi 5 through Wi-Fi 7 (802.11be). Based on Qualcomm IPQ and MediaTek MTK chipsets. Designed for embedded integration into custom motherboards, vehicle systems, and industrial IoT gateways.</p>
+<ul class="feature-list">
+<li>Custom module form factor and pin-out design</li>
+<li>Multi-band with customizable RF tuning</li>
+<li>OpenWrt or bare-metal firmware support</li>
+<li>Rated for -40°C to 85°C industrial environments</li>
+<li>CE/FCC pre-certified reference designs available</li>
+</ul>
+</div>
+
+<div class="odm-category-block">
+<h3>Mesh Network System OEM</h3>
+<p>Self-organizing Mesh network terminals with distributed node architecture. Automatic link detection, dynamic route healing, seamless failover, and bandwidth aggregation. No central base station — ideal for emergency response and infrastructure-free deployments.</p>
+<ul class="feature-list">
+<li>Custom Mesh routing algorithm development</li>
+<li>Multi-radio and multi-band node configurations</li>
+<li>Dispatch platform and NMS software customization</li>
+<li>Backpack, vehicle-mount, and pole-mount form factors</li>
+<li>FPGA-accelerated data forwarding and QoS</li>
+</ul>
+</div>
+
+<div class="odm-category-block">
+<h3>Emergency Communication System ODM</h3>
+<p>Portable backpack emergency communication systems and vehicle-mounted mobile radios for disaster response, mining, oil and gas, and field operations. IP68-rated, infrastructure-free deployment with integrated Mesh networking.</p>
+<ul class="feature-list">
+<li>Custom battery and power management design</li>
+<li>Integrated PoE switch and router functionality</li>
+<li>Custom enclosure for harsh field conditions</li>
+<li>Remote O&M software and dispatch platform</li>
+<li>Multi-carrier and satellite backhaul integration</li>
+</ul>
+</div>
+</div>
+
+<!-- FPGA & Core Technology Section -->
+<div class="section fpga-technology">
+<h2>FPGA-Accelerated Wireless Platform</h2>
+<p>Our FPGA-based processing is a core differentiator for OEM/ODM buyers who need deterministic low-latency performance. We use FPGAs to handle data forwarding, QoS scheduling, encryption, and signal modulation in hardware rather than software — delivering consistent real-time performance for voice, video, and dispatch applications.</p>
+<p>This architecture is available across our wireless bridge, Mesh node, and emergency communication product lines. Custom FPGA logic development is available for ODM partners with specialized processing requirements.</p>
+<ul>
+<li>Hardware-level data forwarding and QoS scheduling</li>
+<li>Low-latency encryption and protocol processing</li>
+<li>Deterministic performance for real-time applications</li>
+<li>Custom FPGA logic development for specialized workloads</li>
+</ul>
+</div>
+
+<!-- Order Specifications Section -->
+<div class="section order-specs">
+<h2>Order Specifications</h2>
+
+<div class="order-specs-grid">
+<div class="spec-row">
+<span class="spec-label">Certifications</span>
+<span class="spec-value">CE, FCC, RoHS, IP68 (additional on request)</span>
+</div>
+<div class="spec-row">
+<span class="spec-label">Minimum Order Quantity</span>
+<span class="spec-value">100 units (standard), 500 units (custom PCB/firmware)</span>
+</div>
+<div class="spec-row">
+<span class="spec-label">Lead Time</span>
+<span class="spec-value">15-30 days (standard), 30-45 days (custom ODM)</span>
+</div>
+<div class="spec-row">
+<span class="spec-label">Samples Available</span>
+<span class="spec-value">Yes — 1-5 units for evaluation, sample fee credited toward first bulk order</span>
+</div>
+<div class="spec-row">
+<span class="spec-label">Certifications Included</span>
+<span class="spec-value">CE, FCC, RoHS (IC, SRRC, TELEC, NCC available via ODM)</span>
+</div>
+<div class="spec-row">
+<span class="spec-label">Payment Terms</span>
+<span class="spec-value">30% deposit, 70% balance before shipment — T/T, L/C accepted in USD</span>
+</div>
+<div class="spec-row">
+<span class="spec-label">Shipping</span>
+<span class="spec-value">DDP, FOB Shenzhen, CIF — DHL/FedEx/UPS express, air and sea freight</span>
+</div>
+<div class="spec-row">
+<span class="spec-label">Packaging</span>
+<span class="spec-value">Each unit individually boxed with protective foam; palletized export cartons for freight</span>
+</div>
+<div class="spec-row">
+<span class="spec-label">Warranty</span>
+<span class="spec-value">2-5 years depending on product line, extended warranties available</span>
+</div>
+</div>
+</div>
+
+<!-- Testing & Quality Control Section -->
+<div class="section quality-control">
+<h2>Testing & Quality Control</h2>
+<p>Every unit passes through rigorous automated testing before shipment. Our QC process covers the full chain: from incoming component inspection to final out-going quality control.</p>
+
+<div class="qc-grid">
+<div class="qc-item">
+<img src="https://aka.doubaocdn.com/s/utR01wmk1A" alt="Wi-Fi Analyzers" />
+<p>Wi-Fi Analyzers</p>
+</div>
+<div class="qc-item">
+<img src="https://aka.doubaocdn.com/s/R4MA1wmk1A" alt="Spectrum Analyzers" />
+<p>Spectrum Analyzers</p>
+</div>
+<div class="qc-item">
+<img src="https://aka.doubaocdn.com/s/dUKr1wmk1A" alt="Oscilloscopes" />
+<p>Oscilloscopes</p>
+</div>
+<div class="qc-item">
+<img src="https://aka.doubaocdn.com/s/FfXW1wmk1A" alt="IQC Inspection" />
+<p>IQC — Incoming QC</p>
+</div>
+<div class="qc-item">
+<img src="https://aka.doubaocdn.com/s/ROTj1wmk1A" alt="IPQC Inspection" />
+<p>IPQC — In-Process QC</p>
+</div>
+<div class="qc-item">
+<img src="https://aka.doubaocdn.com/s/UpVC1wmk1A" alt="OQC Inspection" />
+<p>OQC — Out-Going QC</p>
+</div>
+</div>
+
+<div class="qc-details">
+<div class="qc-test-grid">
+<div class="qc-test-item">
+<div class="qc-test-icon">🌡️</div>
+<div class="qc-test-body">
+<h5>Temperature Chamber</h5>
+<p>High/low temperature burn-in (-40°C to 85°C)</p>
+</div>
+</div>
+<div class="qc-test-item">
+<div class="qc-test-icon">📡</div>
+<div class="qc-test-body">
+<h5>RF Calibration</h5>
+<p>Automated per-unit RF tuning and verification</p>
+</div>
+</div>
+<div class="qc-test-item">
+<div class="qc-test-icon">⚡</div>
+<div class="qc-test-body">
+<h5>Surge &amp; ESD Testing</h5>
+<p>IEC-compliant surge protection and electrostatic discharge verification</p>
+</div>
+</div>
+<div class="qc-test-item">
+<div class="qc-test-icon">💧</div>
+<div class="qc-test-body">
+<h5>Ingress Protection</h5>
+<p>IP68-rated waterproof and dust ingress testing</p>
+</div>
+</div>
+<div class="qc-test-item">
+<div class="qc-test-icon">⏱️</div>
+<div class="qc-test-body">
+<h5>Long-Duration Stability</h5>
+<p>24-72 hour continuous operation trials</p>
+</div>
+</div>
+<div class="qc-test-item">
+<div class="qc-test-icon">🔗</div>
+<div class="qc-test-body">
+<h5>Full Traceability</h5>
+<p>Component lot tracking through assembly, test, and shipment</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- OEM/ODM Process Section -->
+<div class="section process">
+<h2>Our OEM/ODM Process</h2>
+<p>From initial RFQ review to containerized shipment, every OEM/ODM engagement follows a structured six-stage pipeline. Zukaka assigns a dedicated project manager to handle all technical coordination, milestone reporting, and compliance documentation — so you maintain full visibility and control without having to track every detail yourself.</p>
+
+<div class="process-stepper">
+
+<div class="step-item">
+<div class="step-circle">1</div>
+<div class="step-info">
+<div class="step-label">Step 1</div>
+<h4>Inquiry &amp; Requirements</h4>
+</div>
+<div class="step-desc">Share your project scope — product type, target specs, quantities, branding needs, and target markets. Our engineering team reviews feasibility within 24 hours.</div>
+<span class="step-meta">Response within 24h</span>
+</div>
+
+<div class="step-item">
+<div class="step-circle">2</div>
+<div class="step-info">
+<div class="step-label">Step 2</div>
+<h4>Technical Proposal</h4>
+</div>
+<div class="step-desc">We deliver a detailed proposal covering hardware specs, firmware customization scope, certification plan, pricing tiers, and production timeline.</div>
+<span class="step-meta">Detailed spec sheet</span>
+</div>
+
+<div class="step-item">
+<div class="step-circle">3</div>
+<div class="step-info">
+<div class="step-label">Step 3</div>
+<h4>Sample &amp; Validation</h4>
+</div>
+<div class="step-desc">Receive 1-5 evaluation units with your custom firmware and branding applied. Test RF performance, throughput, and management features before committing to production.</div>
+<span class="step-meta">1-5 evaluation units</span>
+</div>
+
+<div class="step-item">
+<div class="step-circle">4</div>
+<div class="step-info">
+<div class="step-label">Step 4</div>
+<h4>Mass Production</h4>
+</div>
+<div class="step-desc">SMT assembly, RF calibration, firmware flashing, and enclosure manufacturing — all under one roof. Weekly progress updates throughout production.</div>
+<span class="step-meta">Full in-house</span>
+</div>
+
+<div class="step-item">
+<div class="step-circle">5</div>
+<div class="step-info">
+<div class="step-label">Step 5</div>
+<h4>QA &amp; Certification</h4>
+</div>
+<div class="step-desc">24-hour burn-in per unit, automated RF calibration, temperature chamber testing, and visual inspection. Signed QC report with every order.</div>
+<span class="step-meta">24h burn-in per unit</span>
+</div>
+
+<div class="step-item">
+<div class="step-circle">6</div>
+<div class="step-info">
+<div class="step-label">Step 6</div>
+<h4>Logistics &amp; Support</h4>
+</div>
+<div class="step-desc">DDP/FOB/CIF shipping with full export documentation. Post-delivery firmware updates, technical support, and warranty service included.</div>
+<span class="step-meta">DDP/FOB/CIF</span>
+</div>
+
+</div>
+</div>
+
+<!-- Why Choose Zukaka Section -->
+<div class="section why-choose-us">
+<h2>Why Buyers Choose Zukaka as Their Industrial Wireless OEM/ODM Partner</h2>
+<p>System integrators, ISPs, government agencies, and brand owners pick Zukaka because we treat OEM/ODM as an R&D partnership, not a transaction. We share PCB schematics under NDA, support firmware upgrades for 5+ years post-shipment, and assign a dedicated project manager to every account.</p>
+<p>Our Shenzhen Hi-Tech Park facility is a direct R&D and manufacturing source — no trading-company markup, no spec drift between batches. We own our IP and do all R&D in-house, from RF baseband design to FPGA development and Mesh routing algorithms.</p>
+
+<div class="why-benefits">
+<div class="benefit-item">
+<h4>Full In-House R&D & Production</h4>
+<p>PCB design, SMT, assembly, RF tuning, firmware, testing, and packaging — one roof, full control. Not a trading company, not an agent.</p>
+</div>
+
+<div class="benefit-item">
+<h4>Custom Firmware & Protocol Stack</h4>
+<p>OpenWrt, Qualcomm SDK, or bare-metal. Your UI, your protocols (private Mesh, TR-069, SNMP), your deployment profiles. Source code delivered with NDA-backed schematics.</p>
+</div>
+
+<div class="benefit-item">
+<h4>Industrial-Grade Build</h4>
+<p>-40°C to 85°C rated. IP68 enclosures. FPGA-accelerated processing. Surge/ESD protection built into every design. Built for 24/7 outdoor operation.</p>
+</div>
+
+<div class="benefit-item">
+<h4>White-Label Ready</h4>
+<p>Your logo on the enclosure, your brand on the boot screen and web UI, your packaging and manuals. Zero Zukaka marking on the final product.</p>
+</div>
+
+<div class="benefit-item">
+<h4>Global Logistics</h4>
+<p>DDP/FOB/CIF to 40+ countries. CE, FCC, RoHS docs handled. DDP terms available for North America, Europe, and Southeast Asia.</p>
+</div>
+
+<div class="benefit-item">
+<h4>300+ OEM Partners Across 6 Continents</h4>
+<p>Emergency response teams, mining operations, ISPs, government agencies, and industrial integrators — running Zukaka-engineered hardware under their own brands.</p>
+</div>
+</div>
+</div>
+
+<!-- FAQ Section -->
+<div class="section faq">
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq-item">
+<h4>What is the MOQ for OEM networking equipment?</h4>
+<p>Standard products start at 100 units. Custom hardware designs (modified PCB, antennas, enclosures) start at 500 units. Evaluation samples of 1-5 units are available before committing to production — the sample fee is credited toward your first bulk order.</p>
+</div>
+
+<div class="faq-item">
+<h4>Do you offer sample units for testing?</h4>
+<p>Yes. We provide 1-5 evaluation units at product cost plus shipping. Sample units can be configured with your custom firmware and branding for real-world field testing. The sample fee is credited toward your first bulk production order.</p>
+</div>
+
+<div class="faq-item">
+<h4>What is the typical lead time?</h4>
+<p>Standard white-label products: 15-20 days. Custom ODM projects (PCB changes, new firmware): 30-45 days from design approval. Sample units: 7-15 days depending on complexity.</p>
+</div>
+
+<div class="faq-item">
+<h4>What certifications do your products carry?</h4>
+<p>All products are CE, FCC, and RoHS certified as standard. Additional market certifications — IC (Canada), TELEC (Japan), NCC (Taiwan), SRRC (China) — are available through our ODM program. We handle the certification process for your target markets.</p>
+</div>
+
+<div class="faq-item">
+<h4>Can you customize the firmware?</h4>
+<p>Yes. We develop custom firmware based on OpenWrt, Qualcomm SDKs, or bare-metal environments. Customizations include: web UI and boot screen, private protocol stacks, Mesh routing algorithms, encryption and VPN integration, TR-069/SNMP management, and pre-configured deployment profiles.</p>
+</div>
+
+<div class="faq-item">
+<h4>What is the warranty period?</h4>
+<p>Standard warranty is 2 years on all products. Extended warranties up to 5 years are available depending on product line and order volume. We also provide post-warranty repair and support services.</p>
+</div>
+
+<div class="faq-item">
+<h4>Do you share PCB schematics and source code?</h4>
+<p>Under NDA, we share PCB schematics, BOM, and firmware source code with OEM/ODM partners. Source code is delivered in a clear three-layer split: your application layer stays yours, the BSP is delivered under license, and hardware IP remains with us.</p>
+</div>
+
+<div class="faq-item">
+<h4>What payment terms do you accept?</h4>
+<p>Standard terms: 30% deposit, 70% balance before shipment. T/T and L/C accepted, all transactions in USD. Alternative terms may be available for established partnerships and repeat orders.</p>
+</div>
+
+<div class="faq-item">
+<h4>Can you handle shipping and customs?</h4>
+<p>Yes. We offer DDP (Delivered Duty Paid), FOB Shenzhen, and CIF terms. We handle all export documentation, customs clearance, and shipping via DHL, FedEx, or UPS express for samples, and air or sea freight for bulk orders.</p>
+</div>
+
+<div class="faq-item">
+<h4>What is your quality control process?</h4>
+<p>Every unit goes through: incoming component inspection (IQC), SMT inspection, automated RF calibration, 24-hour high/low temperature burn-in, surge and ESD testing, IP68 ingress verification, and final out-going QC (OQC). A signed QC report ships with every order with full lot traceability.</p>
+</div>
+
+</div>
+
+<!-- CTA Section -->
+<div class="section cta-section">
+<h2>Ready to Start Your OEM/ODM Project?</h2>
+<p>Factory-direct pricing from Shenzhen Hi-Tech Park. Custom PCBA, firmware, and branding from 100 units. Send us your target specifications — our engineering team responds within 24 hours.</p>
+<p class="cta-email">Email: sales@zukaka.com</p>
+<a href="https://www.zukaka.com/contact/" class="cta-button">Request a Quote</a>
+<a href="https://www.zukaka.com/contact/" class="cta-button secondary">Request Sample Units</a>
+</div>
+
+</div>

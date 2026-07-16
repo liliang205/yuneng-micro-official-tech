@@ -39,8 +39,7 @@
 .oem-odm-page .capabilities-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
 .oem-odm-page .capability-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 32px 24px; transition: box-shadow 0.3s, transform 0.3s; }
 .oem-odm-page .capability-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); transform: translateY(-2px); }
-.oem-odm-page .capability-icon { width: 48px; height: 48px; margin-bottom: 18px; background: #eff6ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
-.oem-odm-page .capability-icon img { width: 28px; height: 28px; }
+.oem-odm-page .capability-icon { width: 48px; height: 48px; margin-bottom: 18px; background: #eff6ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
 .oem-odm-page .capability-card h3 { font-size: 18px; color: #0f172a; margin-bottom: 12px; }
 .oem-odm-page .capability-card p { font-size: 15px; color: #475569; line-height: 1.7; }
 
@@ -247,49 +246,37 @@
 
 <div class="capabilities-grid">
 <div class="capability-card">
-<div class="capability-icon">
-<img src="https://aka.doubaocdn.com/s/YUaR1wmk1A" alt="Custom PCBA Design" />
-</div>
+<div class="capability-icon">🔌</div>
 <h3>Custom PCBA Design & Manufacturing</h3>
 <p>Full PCB lifecycle from schematic capture and RF layout through prototyping and volume production. We design wireless bridge boards, industrial motherboards, and WiFi modules based on Qualcomm and MediaTek industrial-grade chipsets. RF chain tuning for 2.4 GHz, 5.8 GHz, and multi-band configurations.</p>
 </div>
 
 <div class="capability-card">
-<div class="capability-icon">
-<img src="https://aka.doubaocdn.com/s/YUaR1wmk1A" alt="Firmware Customization" />
-</div>
+<div class="capability-icon">⚙️</div>
 <h3>Firmware & Protocol Customization</h3>
 <p>Custom firmware built on OpenWrt, Qualcomm SDKs, or bare-metal environments. Private protocol stack development, Mesh networking algorithms, encryption integration, and custom web UI. Pre-configured deployment profiles for fast rollout.</p>
 </div>
 
 <div class="capability-card">
-<div class="capability-icon">
-<img src="https://aka.doubaocdn.com/s/YUaR1wmk1A" alt="White-Label Branding" />
-</div>
+<div class="capability-icon">🏷️</div>
 <h3>White-Label Branding</h3>
 <p>Full branding support: custom silk-screen logos on enclosures, brand boot screen and web UI, custom packaging and retail boxes, branded user manuals and marketing materials. Zero Yuneng/Zukaka marking on the final product.</p>
 </div>
 
 <div class="capability-card">
-<div class="capability-icon">
-<img src="https://aka.doubaocdn.com/s/YUaR1wmk1A" alt="Industrial-Grade QA" />
-</div>
+<div class="capability-icon">✅</div>
 <h3>Industrial-Grade Quality Assurance</h3>
 <p>Every unit passes high/low temperature burn-in, automated RF calibration, surge and ESD testing, waterproof and dust ingress verification (IP68), and long-duration stability trials. A signed QC report ships with every order — full traceability from component lot to delivery batch.</p>
 </div>
 
 <div class="capability-card">
-<div class="capability-icon">
-<img src="https://aka.doubaocdn.com/s/YUaR1wmk1A" alt="Antenna & Enclosure Design" />
-</div>
+<div class="capability-icon">📡</div>
 <h3>Antenna & Enclosure Design</h3>
 <p>Custom antenna gain and pattern design (omni, sector, directional dish), enclosure modifications for IP-rated outdoor deployment, port layout changes, and mechanical design for vehicle-mount, backpack, or pole-mount form factors.</p>
 </div>
 
 <div class="capability-card">
-<div class="capability-icon">
-<img src="https://aka.doubaocdn.com/s/YUaR1wmk1A" alt="Logistics & Export" />
-</div>
+<div class="capability-icon">🚚</div>
 <h3>Logistics & Export</h3>
 <p>DDP/FOB/CIF shipping to 40+ countries. Full export documentation, CE/FCC certification handling, and customs clearance support included. DDP terms available for North America, Europe, and Southeast Asia.</p>
 </div>
